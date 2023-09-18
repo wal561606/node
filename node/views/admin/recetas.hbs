@@ -1,0 +1,91 @@
+<div class="container" style="margin:10px auto">
+    {{!-- FILA 1 --}}
+    <div class="row">
+        <div class="col-12 text-right">
+            <a href="/admin/productos" class="btn btn-outline-primary"><i class="fa fa-plus"></i> Ir a administrar Productos</a>
+
+        </div>
+        <br>
+        <br>
+        <br>
+        <div class="col">
+            <p class="text-right">Hola {{ usuario }} ! <a href="/admin/login/logout" class="btn btn-sm btn-danger">
+                    Cerrar sesión <i class="fa fa-sign-out"></i>
+                </a>
+            </p>
+        </div>
+    </div>
+    {{!-- FILA 2 --}}
+    <div class="row">
+        <div class="col-7">
+            <h3>Listado de recetas:</h3>
+        </div>
+        <div class="col-5 text-right">
+            <a href="/admin/recetas/agregarReceta" class="btn btn-success"><i class="fa fa-plus"></i> Nueva Receta </a>
+        </div>
+    </div>
+    
+    {{!-- Tabla de recetas --}}
+
+
+    <div class="row">
+        <div class="col">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Descripción</th>
+                        <th scope="col">Imagen</th>
+                        <th scope="col" class="text-center">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each recetas}}
+                    <tr>
+                        <th scope="row">{{id}}</th>
+                        <td class="recipe-name"><strong>{{nombre}}</strong></td>
+                        <td>{{descripcion}}</td>
+                        <td>{{{imagen}}}</td>
+                        <td class="text-center">
+                            <a href="/admin/recetas/modificarReceta/{{id}})" class="btn btn-sm btn-secondary"><i class="fa fa-pencil"></i></a>
+                            <a href="/admin/recetas/eliminarReceta/{{id}}" class="btn btn-sm btn-secondary confirm-delete"><i class="fa fa-trash"></i></a>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{{!-- sweetalert2 para animar la consulta de eliminacion --}}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const deleteButtons = document.querySelectorAll('.confirm-delete');
+
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function (event) {
+                event.preventDefault();
+                const deleteLink = event.currentTarget.getAttribute('href');
+                const recipeName = event.currentTarget.closest('tr').querySelector('.recipe-name').textContent.trim();
+
+                Swal.fire({
+                    title: '¿Estás seguro?',
+                    text: `Esta acción eliminará la receta: "${recipeName}".`,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Sí, eliminar',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = deleteLink;
+                    }
+                });
+            });
+        });
+    });
+</script>
+
+
+

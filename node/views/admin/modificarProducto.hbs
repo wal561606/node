@@ -1,0 +1,36 @@
+<div class="contanier" style="margin:50px auto">
+    <div class="row">
+        <div class="col-6 offset-3">
+            <h4>Modificar el producto</h4>
+            <form method="post" action="/admin/productos/modificarProducto" enctype="multipart/form-data">
+                <input type="hidden" value="{{producto.id}}" name="id">
+                <div class="form-group">
+                    <input type="text" placeholder="Nombre" value="{{producto.nombre}}" class="form-control"
+                        name="nombre">
+                </div>
+                <div class="form-group">
+                    <textarea placeholder="Descripcion" class="form-control"
+                        name="descripcion">{{producto.descripcion}}</textarea>
+                </div>
+                <div class="form-group">
+                    <input type="number" placeholder="Precio" class="form-control" name="precio"
+                        value="{{producto.precio}}">
+                </div>
+                <div class="form-group">
+                    <p> 
+                        <label>Imagen: <input class="form-control" type="file" name="imagen" id="imagen" /></label>
+                    </p>
+                            <p> 
+                                <label><input type="checkbox" name="img_delete" id="img_delete" value="1">
+                                    Eliminar imagen actual?</label>
+                                <input type="hidden" name="img_original" value="{{producto.img_id}}">
+                            </p>
+                </div>
+                <button type="submit" class="btn btn-primary">Modificar</button>
+            </form>
+            {{#if error}}
+            <h5>{{message}}</h5>
+            {{/if}}
+        </div>
+    </div>
+</div>
