@@ -1,4 +1,4 @@
-var mysql = require('mysql');
+var mysql = require('mysql2');
 var util = require('util');
 
 // conexión a la base de datos mediante un pool 
