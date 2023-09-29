@@ -1,4 +1,4 @@
-var mysql = require('mysql');
+var mysql = require('mysql2');
 var util = require('util');
 
 // conexión a la base de datos mediante un pool 
@@ -12,9 +12,6 @@ var pool = mysql.createPool({
     port: process.env.MYSQLPORT
 
 
-    
-    //------Configuracion local------
-    
     //host: process.env.MYSQL_HOST,
     //user: process.env.MYSQL_USER, 
     //password: process.env.MYSQL_PASSWORD,
