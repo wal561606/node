@@ -11,7 +11,7 @@ var pool = mysql.createPool({
     url: process.env.MYSQL_URL,
     port: process.env.MYSQLPORT
 
-    // ---- Configuración local -----
+
     //host: process.env.MYSQL_HOST,
     //user: process.env.MYSQL_USER, 
     //password: process.env.MYSQL_PASSWORD,
